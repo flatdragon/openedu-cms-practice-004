@@ -2,7 +2,7 @@ require('http').Server((req, res) => {
   const author = 'itmo282167'
 
   res.setHeader('X-Author', author)
-  res.setHeader('Content-Type', 'application/json; charset=UTF-8')
+  res.setHeader('Content-Type', 'application/json')
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'x-test,Content-Type,Accept,Access-Control-Allow-Headers')
@@ -20,7 +20,7 @@ require('http').Server((req, res) => {
         'x-body': body,
       }))
     })
+  } else {
+    res.end(author)
   }
-
-  res.end(author)
 }).listen(process.env.PORT)
