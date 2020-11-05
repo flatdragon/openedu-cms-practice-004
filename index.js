@@ -8,11 +8,18 @@ require('http').Server((req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'x-test,Content-Type,Accept,Access-Control-Allow-Headers')
 
   if (req.url === '/result4/') {
-    return res.end(JSON.stringify({
-      message: author,
-      'x-result': req.headers['x-text'],
-      'x-body': req.body,
-    }))
+    let body = [];
+    req.on('data', (chunk) => {
+      body.push(chunk);
+    }).on('end', () => {
+      body = Buffer.concat(body).toString();
+
+      return res.end(JSON.stringify({
+        message: author,
+        'x-result': req.headers['x-test'],
+        'x-body': body,
+      }))
+    })
   }
 
   res.end(author)
