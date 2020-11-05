@@ -8,11 +8,11 @@ require('http').Server((req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'x-test,Content-Type,Accept,Access-Control-Allow-Headers')
 
   if (req.url === '/result4/') {
-    return res.end({
+    return res.end(JSON.stringify({
       message: author,
       'x-result': req.headers['x-text'],
       'x-body': req.body,
-    })
+    }))
   }
 
   res.end(author)
